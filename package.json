@@ -25,6 +25,7 @@
     "@next/bundle-analyzer": "^14.0.4",
     "@types/node": "^22.9.1",
     "@types/react": "^18.3.12",
+    "@types/react-scroll": "^1.8.10",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",

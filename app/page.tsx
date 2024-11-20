@@ -2,6 +2,7 @@
 
 import { MetaBall } from '@/components/canvas/Examples'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { Suspense } from 'react'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
@@ -25,6 +26,11 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
+  const handleScroll = (e, id) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    const section = document.querySelector(id); // Select target section
+    section?.scrollIntoView({ behavior: "smooth" }); // Smooth scroll
+  };
   return (
     <>
       <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-12 font-penny text-[48px]'>JoshBotterill</div>
@@ -36,12 +42,17 @@ export default function Page() {
           </Suspense>
         </View>
       </div>
-      <div className='absolute bottom-0 right-0 z-10  p-[10px] font-penny text-[48px]'>
-        <div>Work</div>
-        <div>Contact</div>
-
+      <div className='absolute bottom-0 right-0 z-10 cursor-pointer p-8 text-center font-penny text-[48px]'>
+        <a onClick={(e) => handleScroll(e, '#work-section')} className='leading-10'>Work</a>
+        <a onClick={(e) => handleScroll(e, '#imprint-section')} className='leading-8'>Imprint</a>
       </div>
 
+      <div id='work-section' className='h-screen bg-red-500'>
+        Work
+      </div>
+      <div id='imprint-section' className='h-screen bg-green-500'>
+        Imprint
+      </div>
     </>
   )
 }
