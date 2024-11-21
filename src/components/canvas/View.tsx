@@ -1,8 +1,14 @@
 'use client'
 
-import { forwardRef, Ref, Suspense, useImperativeHandle, useRef } from 'react'
-import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
+import { forwardRef, ReactNode, Ref, Suspense, useImperativeHandle, useRef } from 'react'
+import { OrbitControls, OrbitControlsProps, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
+
+
+interface Props {
+  children?: ReactNode,
+  orbit?: OrbitControlsProps
+}
 
 export const Common = ({ color }) => (
   <Suspense fallback={null}>

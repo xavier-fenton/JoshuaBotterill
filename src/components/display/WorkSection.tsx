@@ -1,7 +1,8 @@
 'use client'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { MetaBall } from '../canvas/Examples'
 import dynamic from 'next/dynamic'
+import { ObjectSection } from './ObjectSection'
 
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
@@ -37,48 +38,61 @@ const multipleObjects = () => {
 }
 multipleObjects();
 
-const WorkSection = () => (
-    <>
-        <div id="work-section" className='flex flex-col bg-red-500'>
-            <div className="px-[5px] pt-[5px] font-penny text-[24px]">Work</div>
-            {/* Spit section, left side Grid display. Right side main display */}
-            <div className="relative m-[5px] flex h-full flex-row rounded bg-green-400">
-                {/* Grid */}
-                <div className="relative size-full rounded bg-slate-400">
+
+const WorkSection = () => {
+    const [display, setDisplay] = useState<boolean>(false)
 
 
-                    <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
-                        {objects.length > 0 ?
-                            objects.map((obj: { id: string, rotNum: number }) => {
+    return (
 
 
-                                return (
-                                    <div id={obj.id} key={obj.id}>
-                                        <View orbit className='relative aspect-square h-full'>
-                                            <Suspense fallback={null}>
-                                                <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, obj.rotNum, 0]} />
-                                                <Common color={'white'} />
-                                            </Suspense>
-                                        </View>
-                                    </div>
+        <>
+            <div id="work-section" className='flex flex-col bg-red-500'>
+                {/* Display on/off Object Section, We send object details to this component */}
+                <div className={`${display == false ? 'hidden' : 'absolute'} sticky top-0 z-10 bg-white`}>
+                    <ObjectSection props={{ display: display, setDisplay: setDisplay }} />
+                </div>
+
+                <div className="px-[5px] pt-[5px] font-penny text-[24px]">Work</div>
+                {/* Spit section, left side Grid display. Right side main display */}
+                <div className="relative m-[5px] flex h-full flex-row rounded bg-green-400">
+                    {/* Grid */}
+                    <div className="relative size-full rounded bg-slate-400">
+
+
+                        <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
+                            {objects.length > 0 ?
+                                objects.map((obj: { id: string, rotNum: number }) => {
+
+
+                                    return (
+                                        <div className="cursor-pointer" onClick={() => { setDisplay(true) }} id={obj.id} key={obj.id}>
+                                            <View orbit className='relative aspect-square h-full'>
+                                                <Suspense fallback={null}>
+                                                    <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, obj.rotNum, 0]} />
+                                                    <Common color={'white'} />
+                                                </Suspense>
+                                            </View>
+                                        </div>
+                                    )
+                                }
+
                                 )
-                            }
-
-                            )
-                            : <div>No objs</div>}
+                                : <div>No objs</div>}
 
 
+
+                        </div>
 
                     </div>
 
+
+
                 </div>
-
-
-
             </div>
-        </div>
 
-    </>
-)
+        </>
+    )
+}
 
 export { WorkSection }

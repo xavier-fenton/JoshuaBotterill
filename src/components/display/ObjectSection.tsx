@@ -27,10 +27,12 @@ const ObjectSection = ({ props }) => {
         <>
             <div id="object-section" className='h-screen'>
                 <div className="absolute z-10 w-fit -rotate-12 pt-[30px] font-penny text-[48px]">Joshua Botterill</div>
+                <div onClick={() => { props.setDisplay(false) }} className="absolute right-2 z-10 w-fit rotate-12 cursor-pointer pt-[10px] text-[12px]">Close</div>
+
                 <div className="flex size-full flex-row">
                     {/* Object */}
-                    <div className='size-full'>
-                        <View orbit className='relative size-full'>
+                    <div className={`size-full`}>
+                        <View orbit className={`relative size-full`}>
                             <Suspense fallback={null}>
                                 <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0]} />
                                 <Common color={'white'} />

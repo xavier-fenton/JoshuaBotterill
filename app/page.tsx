@@ -6,15 +6,13 @@ import { ObjectSection } from '@/components/display/ObjectSection'
 import { WorkSection } from '@/components/display/WorkSection'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { Suspense } from 'react'
+import { AnchorHTMLAttributes, MouseEvent, Suspense } from 'react'
+import { Event } from 'three'
 
-const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
-const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
-    <div className='flex h-96 w-full flex-col items-center justify-center'>
+    <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2'>
       <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
@@ -29,11 +27,16 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
-  const handleScroll = (e, id) => {
+
+
+  const handleScroll = (e: MouseEvent, id: string) => {
     e.preventDefault(); // Prevent default anchor behavior
     const section = document.querySelector(id); // Select target section
     section?.scrollIntoView({ behavior: "smooth" }); // Smooth scroll
   };
+
+
+
   return (
     <>
       <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-12 font-penny text-[48px]'>JoshBotterill</div>
@@ -47,13 +50,11 @@ export default function Page() {
       </div>
       <div className='absolute bottom-0 right-0 z-10 flex cursor-pointer flex-col p-8 text-center font-penny text-[48px]'>
         <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
-        <a onClick={(e) => handleScroll(e, '#object-section')} className=''>Object</a>
-
         <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>
 
       <WorkSection />
-      <ObjectSection />
+      {/* <ObjectSection /> */}
       <ImprintSection />
     </>
   )
