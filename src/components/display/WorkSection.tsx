@@ -72,23 +72,7 @@ const WorkSection = () => (
                     </div>
 
                 </div>
-                {/* Set object into here */}
-                <div className="size-full rounded bg-orange-400">
-                    <div className='h-full bg-orange-400'>
-                        <div className='text-[38px]'>Object000</div>
-                        {/* Description */}
-                        <div className='w-[calc(100%-20px)]'>
 
-                            <p className='text-sm leading-[15px]'>
-                                Deserunt eiusmod occaecat dolore minim et quis nostrud in veniam sint. Nostrud deserunt cupidatat adipisicing laboris incididunt dolore esse irure irure do. Ullamco ut adipisicing sint labore proident voluptate. Minim veniam voluptate aliqua dolor ipsum minim ipsum sit amet adipisicing dolore eu dolor duis. Duis qui in magna ad deserunt in dolore adipisicing tempor amet nostrud. Veniam sit voluptate sint id ad ex laborum cupidatat culpa consequat sunt laboris et Lorem.
-
-                                Dolore duis nulla enim irure non anim in fugiat proident officia. Commodo enim aute deserunt nulla sit mollit. Consectetur aute consequat nulla nostrud eu consequat reprehenderit aliqua sunt commodo culpa incididunt. Eiusmod dolore nisi veniam ut sunt cillum voluptate cupidatat sint est incididunt. Dolore ea sunt ullamco commodo laboris consectetur commodo tempor aliquip.
-
-                                Ex amet in ullamco nostrud culpa est ad elit non exercitation aliqua irure. Aliquip nostrud proident quis excepteur laboris occaecat labore fugiat occaecat. Reprehenderit laborum dolor deserunt enim ut consectetur esse duis aute quis ut labore minim. Aliquip duis ex occaecat qui voluptate ex irure enim exercitation dolor aliqua.
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>

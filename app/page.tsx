@@ -1,8 +1,9 @@
 'use client'
 
 import { MetaBall } from '@/components/canvas/Examples'
-import { ImprintSection } from '@/components/display/imprintsection'
-import { Section, WorkSection } from '@/components/display/worksection'
+import { ImprintSection } from '@/components/display/ImprintSection'
+import { ObjectSection } from '@/components/display/ObjectSection'
+import { WorkSection } from '@/components/display/WorkSection'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -46,10 +47,13 @@ export default function Page() {
       </div>
       <div className='absolute bottom-0 right-0 z-10 flex cursor-pointer flex-col p-8 text-center font-penny text-[48px]'>
         <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
+        <a onClick={(e) => handleScroll(e, '#object-section')} className=''>Object</a>
+
         <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>
 
       <WorkSection />
+      <ObjectSection />
       <ImprintSection />
     </>
   )
