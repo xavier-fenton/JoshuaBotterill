@@ -71,7 +71,7 @@ export function Dog(props) {
 export function MetaBall(props: Props) {
   const { scene } = useGLTF('/metaball.glb')
 
-  useFrame((state, delta) => (scene.rotation.y += delta))
+  useFrame((state, delta) => (scene.rotation.y += (delta / 4)))
 
   return <primitive object={scene} {...props} />
 

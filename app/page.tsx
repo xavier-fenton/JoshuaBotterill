@@ -1,6 +1,8 @@
 'use client'
 
 import { MetaBall } from '@/components/canvas/Examples'
+import { ImprintSection } from '@/components/display/imprintsection'
+import { Section, WorkSection } from '@/components/display/worksection'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -8,7 +10,7 @@ import { Suspense } from 'react'
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
 const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
-const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div className='flex h-96 w-full flex-col items-center justify-center'>
@@ -42,17 +44,13 @@ export default function Page() {
           </Suspense>
         </View>
       </div>
-      <div className='absolute bottom-0 right-0 z-10 cursor-pointer p-8 text-center font-penny text-[48px]'>
-        <a onClick={(e) => handleScroll(e, '#work-section')} className='leading-10'>Work</a>
-        <a onClick={(e) => handleScroll(e, '#imprint-section')} className='leading-8'>Imprint</a>
+      <div className='absolute bottom-0 right-0 z-10 flex cursor-pointer flex-col p-8 text-center font-penny text-[48px]'>
+        <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
+        <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>
 
-      <div id='work-section' className='h-screen bg-red-500'>
-        Work
-      </div>
-      <div id='imprint-section' className='h-screen bg-green-500'>
-        Imprint
-      </div>
+      <WorkSection />
+      <ImprintSection />
     </>
   )
 }
