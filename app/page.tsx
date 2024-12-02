@@ -52,10 +52,7 @@ export default function Page() {
         <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
         <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>
-
       <WorkSection />
-      {/* <ObjectSection /> */}
-      <ImprintSection />
     </>
   )
 }

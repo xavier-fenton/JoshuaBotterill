@@ -2,8 +2,8 @@
 import { Suspense, useState } from 'react'
 import { MetaBall } from '../canvas/Examples'
 import dynamic from 'next/dynamic'
+import { CameraControls, Environment, OrbitControls } from '@react-three/drei'
 
-// import { View, Common } from '@/page'
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
@@ -32,7 +32,7 @@ const WorkSection = () => {
 
 
         <>
-            <div id="work-section" className='flex h-full flex-col bg-red-500'>
+            <div id="work-section" className='flex flex-col'>
                 {/* Display on/off Object Section, We send object details to this component */}
                 <div className={`${display == false ? 'hidden' : 'absolute'} sticky top-0 z-10 bg-white`}>
                     {/* <ObjectSection props={{ display: display, setDisplay: setDisplay }} /> */}
@@ -40,25 +40,20 @@ const WorkSection = () => {
 
                 <div className="px-[5px] pt-[5px] font-penny text-[24px]">Work</div>
                 {/* Spit section, left side Grid display. Right side main display */}
-                <div className="relative m-[5px] flex h-full flex-row rounded bg-green-400">
+                <div className="relative m-[5px] h-full flex-row rounded">
                     {/* Grid */}
-                    <div className="relative size-full rounded bg-slate-400">
-
-
-                        <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
-                            <div className="relative h-1/2 cursor-pointer" onClick={() => { setDisplay(true) }}>
-                                <View className="relative aspect-square size-full">
-                                    <Suspense >
-                                        <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
-                                        <Common color={'white'} />
-                                    </Suspense>
-                                </View>
-                            </div>
+                    <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
+                        <div className="relative cursor-pointer" onClick={() => { setDisplay(true) }}>
+                            <View className="relative aspect-square size-full">
+                                <Suspense >
+                                    <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
+                                    <Common color={'white'} />
+                                    <OrbitControls enablePan={false} />
+                                    <Environment preset="city" background />
+                                </Suspense>
+                            </View>
                         </div>
-
                     </div>
-
-
 
                 </div>
             </div>
