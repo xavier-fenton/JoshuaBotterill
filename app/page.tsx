@@ -24,7 +24,7 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
     </div>
   ),
 })
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+export const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
 
@@ -41,7 +41,7 @@ export default function Page() {
     <>
       <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-12 font-penny text-[48px]'>JoshBotterill</div>
       <div className='relative h-full'>
-        <View orbit className='relative h-full'>
+        <View className="relative h-full">
           <Suspense fallback={null}>
             <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0]} />
             <Common color={'white'} />

@@ -1,9 +1,9 @@
 'use client'
 
-import { forwardRef, ReactNode, Ref, Suspense, useImperativeHandle, useRef } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode, Suspense, useImperativeHandle, useRef } from 'react'
 import { OrbitControls, OrbitControlsProps, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
-
+import { ForwardRefComponent } from '@react-three/drei/helpers/ts-utils'
 
 interface Props {
   children?: ReactNode,
@@ -20,7 +20,7 @@ export const Common = ({ color }) => (
   </Suspense>
 )
 
-const View = forwardRef(({ children, orbit, ...props }, ref) => {
+const View: ForwardRefComponent<Props, {}> = forwardRef(({ children, orbit, ...props }, ref) => {
   const localRef = useRef(null)
   useImperativeHandle(ref, () => localRef.current)
 

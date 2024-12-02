@@ -1,6 +1,6 @@
 'use client'
 
-import { useFrame, useLoader } from '@react-three/fiber'
+import { PrimitiveProps, useFrame, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export function MetaBall(props) {

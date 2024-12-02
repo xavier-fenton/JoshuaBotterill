@@ -32,7 +32,7 @@ const ObjectSection = ({ props }) => {
                 <div className="flex size-full flex-row">
                     {/* Object */}
                     <div className={`size-full`}>
-                        <View orbit className={`relative size-full`}>
+                        <View>
                             <Suspense fallback={null}>
                                 <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0]} />
                                 <Common color={'white'} />

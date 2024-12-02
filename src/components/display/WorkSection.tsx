@@ -2,8 +2,8 @@
 import { Suspense, useState } from 'react'
 import { MetaBall } from '../canvas/Examples'
 import dynamic from 'next/dynamic'
-import { ObjectSection } from './ObjectSection'
 
+// import { View, Common } from '@/page'
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
@@ -21,22 +21,7 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
-let objects = [];
-
-const multipleObjects = () => {
-
-    const count = 8;
-
-    for (let i = 0; i < count; i++) {
-        objects.push({ id: `testID: ${i}`, rotNum: i })
-
-    }
-
-
-
-
-}
-multipleObjects();
+const ObjectSection = dynamic(() => import('@/components/display/ObjectSection').then((mod) => mod.ObjectSection), { ssr: false })
 
 
 const WorkSection = () => {
@@ -47,10 +32,10 @@ const WorkSection = () => {
 
 
         <>
-            <div id="work-section" className='flex flex-col bg-red-500'>
+            <div id="work-section" className='flex h-full flex-col bg-red-500'>
                 {/* Display on/off Object Section, We send object details to this component */}
                 <div className={`${display == false ? 'hidden' : 'absolute'} sticky top-0 z-10 bg-white`}>
-                    <ObjectSection props={{ display: display, setDisplay: setDisplay }} />
+                    {/* <ObjectSection props={{ display: display, setDisplay: setDisplay }} /> */}
                 </div>
 
                 <div className="px-[5px] pt-[5px] font-penny text-[24px]">Work</div>
@@ -61,27 +46,14 @@ const WorkSection = () => {
 
 
                         <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
-                            {objects.length > 0 ?
-                                objects.map((obj: { id: string, rotNum: number }) => {
-
-
-                                    return (
-                                        <div className="cursor-pointer" onClick={() => { setDisplay(true) }} id={obj.id} key={obj.id}>
-                                            <View orbit className='relative aspect-square h-full'>
-                                                <Suspense fallback={null}>
-                                                    <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, obj.rotNum, 0]} />
-                                                    <Common color={'white'} />
-                                                </Suspense>
-                                            </View>
-                                        </div>
-                                    )
-                                }
-
-                                )
-                                : <div>No objs</div>}
-
-
-
+                            <div className="relative h-1/2 cursor-pointer" onClick={() => { setDisplay(true) }}>
+                                <View className="relative aspect-square size-full">
+                                    <Suspense >
+                                        <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
+                                        <Common color={'white'} />
+                                    </Suspense>
+                                </View>
+                            </div>
                         </div>
 
                     </div>
