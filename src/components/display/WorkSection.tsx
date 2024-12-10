@@ -32,7 +32,7 @@ const WorkSection = () => {
 
 
         <>
-            <div id="work-section" className='flex flex-col'>
+            <div id="work-section" className='flex h-dvh flex-col'>
                 {/* Display on/off Object Section, We send object details to this component */}
                 <div className={`${display == false ? 'hidden' : 'absolute'} sticky top-0 z-10 bg-white`}>
                     {/* <ObjectSection props={{ display: display, setDisplay: setDisplay }} /> */}
@@ -43,8 +43,8 @@ const WorkSection = () => {
                 <div className="relative m-[5px] h-full flex-row rounded">
                     {/* Grid */}
                     <div className="relative grid h-full grid-cols-2 gap-[10px] p-[10px] md:grid-cols-3">
-                        <div className="relative cursor-pointer" onClick={() => { setDisplay(true) }}>
-                            <View className="relative aspect-square size-full">
+                        <div className="relative h-full cursor-pointer">
+                            <View className="relative h-dvh w-full">
                                 <Suspense >
                                     <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
                                     <Common color={'white'} />
@@ -53,6 +53,7 @@ const WorkSection = () => {
                                 </Suspense>
                             </View>
                         </div>
+
                     </div>
 
                 </div>
