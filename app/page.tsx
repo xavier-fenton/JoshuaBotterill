@@ -3,11 +3,12 @@
 import { MetaBall } from '@/components/canvas/Examples'
 import { ImprintSection } from '@/components/display/ImprintSection'
 import { ObjectSection } from '@/components/display/ObjectSection'
+import TestSanity from '@/components/display/TestSanity'
 import { WorkSection } from '@/components/display/WorkSection'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { AnchorHTMLAttributes, MouseEvent, Suspense } from 'react'
-import { Event } from 'three'
+
 
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -52,7 +53,9 @@ export default function Page() {
         <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
         <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>
+      <TestSanity />
       <WorkSection />
+
     </>
   )
 }
