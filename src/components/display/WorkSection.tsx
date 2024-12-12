@@ -1,6 +1,6 @@
 'use client'
 import { Suspense, useState } from 'react'
-import { MetaBall } from '../canvas/Examples'
+import { MetaBall, UntitledObject } from '../canvas/Examples'
 import dynamic from 'next/dynamic'
 import { CameraControls, Environment, OrbitControls } from '@react-three/drei'
 
@@ -47,6 +47,16 @@ const WorkSection = () => {
                             <View className="relative h-dvh w-full">
                                 <Suspense >
                                     <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
+                                    <Common color={'white'} />
+                                    <OrbitControls enablePan={false} />
+                                    <Environment preset="city" background />
+                                </Suspense>
+                            </View>
+                        </div>
+                        <div className="relative h-full cursor-pointer">
+                            <View className="relative h-dvh w-full">
+                                <Suspense >
+                                    <UntitledObject scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
                                     <Common color={'white'} />
                                     <OrbitControls enablePan={false} />
                                     <Environment preset="city" background />

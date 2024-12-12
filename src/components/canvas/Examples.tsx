@@ -10,3 +10,12 @@ export function MetaBall(props) {
   return <primitive object={scene} {...props} />
 
 }
+
+
+export function UntitledObject(props) {
+  const { scene } = useLoader(GLTFLoader, '/untitled.glb')
+
+
+  return <primitive object={scene} {...props} />
+
+}
