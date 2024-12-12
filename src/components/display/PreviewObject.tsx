@@ -35,9 +35,6 @@ type PropType = {
 
 export const PreviewObject = ({ value }) => {
 
-    console.log(value);
-
-
     if (!value) {
         return <p className='border'>No file uploaded yet</p>;
     }
