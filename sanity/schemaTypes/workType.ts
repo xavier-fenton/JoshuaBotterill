@@ -12,6 +12,13 @@ export const workType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'objectFile',
+      type: 'file',
+      options: {
+        accept: '.glb'
+      }
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {
