@@ -1,7 +1,7 @@
 import { SanityClient, SanityDocument } from "next-sanity"
 import { WorkBatch } from "../types/work"
 
-import { WORKS_QUERY } from "../queries"
+import { WORKS_QUERY, FILES_QUERY } from "../queries"
 
 export const retrieveContent = async (client: SanityClient): Promise<WorkBatch> => {
     try {
