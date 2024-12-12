@@ -1,14 +1,13 @@
 import React, { use, useMemo, useState } from 'react';
-import { initClient } from 'sanity/lib/utils/sanityClient';
-import { retrieveContent } from 'sanity/lib/utils/fetchPosts';
-
+import { retrieveContent } from '../../../sanity/lib/utils/fetchPosts';
+import { client } from '../../../sanity/lib/utils/sanityClient';
+import { WorkBatch } from 'sanity/lib/types/work';
 
 const TestSanity = () => {
-    const [data, setData] = useState<any[] | void>([])
+    const [data, setData] = useState<WorkBatch>([])
 
     useMemo(async () => {
-        const data: any[] | void = await retrieveContent(client)
-        console.log(data);
+        const data = await retrieveContent(client)
 
         return setData(data)
     }, [])
@@ -17,7 +16,7 @@ const TestSanity = () => {
         <div className='h-dvh'>
             hello
             <ul>
-                {data.map((post) => (
+                {data && data.map((post) => (
                     <li key={post._id}>
                         <a>{post?.title}</a>
                     </li>
