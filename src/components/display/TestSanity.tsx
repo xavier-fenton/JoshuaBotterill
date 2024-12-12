@@ -1,18 +1,7 @@
 import React, { use, useMemo, useState } from 'react';
-import { initClient } from '@/utils/sanityClient';
-import { POSTS_QUERY } from '../../../sanity/lib/queries';
-import { retrieveContent } from '@/utils/fetchPosts';
-import { SanityClient } from 'sanity';
+import { initClient } from 'sanity/lib/utils/sanityClient';
+import { retrieveContent } from 'sanity/lib/utils/fetchPosts';
 
-
-const client = initClient()
-
-export async function getContent() {
-    const posts = await retrieveContent(client)
-
-
-    return { posts }
-}
 
 const TestSanity = () => {
     const [data, setData] = useState<any[] | void>([])

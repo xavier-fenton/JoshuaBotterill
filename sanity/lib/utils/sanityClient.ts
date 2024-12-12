@@ -1,7 +1,7 @@
 import {createClient, type ClientConfig} from "@sanity/client"
 import { SanityClient } from "sanity"
 
-export const initClient = (): SanityClient | void => {
+export const initClient = (): SanityClient => {
     try {
         const config: ClientConfig = {
             projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, 
@@ -23,3 +23,5 @@ export const initClient = (): SanityClient | void => {
         console.trace(e)
     }
 }
+
+export const client = initClient()
