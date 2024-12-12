@@ -1,10 +1,11 @@
 import { SanityClient, SanityDocument } from "next-sanity"
-import type { postType } from "sanity/schemaTypes/postType"
-const PROJECT_QUERY = `*[_type == "works"]`
+import { WorkBatch } from "../types/work"
 
-export const retrieveContent = async (client: SanityClient): Promise<typeof postType> => {
+import { WORKS_QUERY } from "../queries"
+
+export const retrieveContent = async (client: SanityClient): Promise<WorkBatch> => {
     try {
-        const response = await client.fetch(PROJECT_QUERY)
+        const response = await client.fetch(WORKS_QUERY) as WorkBatch
         return response
 
     } catch (error: unknown) {
