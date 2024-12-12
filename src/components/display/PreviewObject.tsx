@@ -1,8 +1,9 @@
 // This component is purely for previewing the Objects in the Sanity Studio
+import { fetchGLB } from '@/helpers/utils/fetchGlb';
 import { Environment, InstanceProps, OrbitControls } from '@react-three/drei';
 import { Canvas, MeshProps, useLoader } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
@@ -32,25 +33,30 @@ type PropType = {
     fileSource: string
 }
 
-const PreviewObject = () => {
+export const PreviewObject = ({ value }) => {
 
-    function UntitledObject(props: MeshProps & PropType) {
+    console.log(value);
 
-        const source: string = props.fileSource ? props.fileSource : '/metaball.glb'
 
-        const { scene } = useLoader(GLTFLoader, source)
+    if (!value) {
+        return <p className='border'>No file uploaded yet</p>;
+    }
+
+    function Object(props: MeshProps) {
+
+        const { scene } = useLoader(GLTFLoader, value as string)
 
 
         return <primitive object={scene} {...props} />
 
     }
 
+
     return (
         <div className='h-full'>
-            <mesh></mesh>
             <View className="h-full">
                 <Suspense>
-                    <UntitledObject scale={0.1} position={[0, -1, 0]} rotation={[0.0, 0.0, 0.0]} fileSource={'/untitled.glb'} />
+                    <Object scale={0.1} position={[0, -1, 0]} rotation={[0.0, 0.0, 0.0]} />
                     <Common color={'white'} />
                     <Environment preset='city' background />
                     <OrbitControls enablePan={false} />
