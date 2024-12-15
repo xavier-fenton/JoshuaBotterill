@@ -56,7 +56,7 @@ const WorkSection = () => {
                         <div className="relative h-full cursor-pointer">
                             <View className="relative h-dvh w-full">
                                 <Suspense >
-                                    <UntitledObject scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
+                                    <UntitledObject scale={0.175} position={[0, -1.7, 0]} rotation={[0.0, 0.0, 0.0]} />
                                     <Common color={'white'} />
                                     <OrbitControls enablePan={false} />
                                     <Environment preset="city" background />
