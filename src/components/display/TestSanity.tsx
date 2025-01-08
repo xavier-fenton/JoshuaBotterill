@@ -8,7 +8,7 @@ import { urlBuilder } from '@/helpers/utils/sanityUrlBuilder';
 
 
 
-const TestSanity = () => {
+export const TestSanity = () => {
     const [data, setData] = useState<WorkBatch>([])
 
     useMemo(async () => {
@@ -18,7 +18,7 @@ const TestSanity = () => {
 
     return (
         <div className='h-dvh'>
-            <div className='h-full'>
+            <div className='relative grid h-full grid-cols-2 gap-[10px] md:grid-cols-3'>
                 {data && data.map((post, index) => (
                     <PreviewObject key={index} value={urlBuilder(post.objectFile.asset._ref)} />
                 ))}
@@ -26,5 +26,3 @@ const TestSanity = () => {
         </div >
     );
 };
-
-export default TestSanity;

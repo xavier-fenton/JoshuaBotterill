@@ -1,5 +1,4 @@
 // This component is purely for previewing the Objects in the Sanity Studio
-import { fetchGLB } from '@/helpers/utils/fetchGlb';
 import { Environment, InstanceProps, OrbitControls } from '@react-three/drei';
 import { Canvas, MeshProps, useLoader } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
@@ -50,10 +49,10 @@ export const PreviewObject = ({ value }) => {
 
 
     return (
-        <div className='h-full'>
-            <View className="h-full">
+        <div className='relative h-full'>
+            <View className="relative h-full">
                 <Suspense>
-                    <Object scale={0.1} position={[0, -1, 0]} rotation={[0.0, 0.0, 0.0]} />
+                    <Object onPointerEnter={() => { console.log(true) }} scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
                     <Common color={'white'} />
                     <Environment preset='city' background />
                     <OrbitControls enablePan={false} />
