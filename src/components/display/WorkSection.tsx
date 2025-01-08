@@ -21,7 +21,7 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
-const ObjectSection = dynamic(() => import('@/components/display/TestSanity').then((mod) => mod.TestSanity), {
+const ObjectSection = dynamic(() => import('@/components/display/ViewObjects').then((mod) => mod.ViewObjects), {
     ssr: false, loading: () => (
         <div className='flex h-dvh flex-col items-center justify-center'>
             <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
@@ -38,7 +38,6 @@ const ObjectSection = dynamic(() => import('@/components/display/TestSanity').th
 
 
 const WorkSection = () => {
-    const [display, setDisplay] = useState<boolean>(false)
 
 
     return (
@@ -48,7 +47,6 @@ const WorkSection = () => {
             <div id="work-section" className='relative flex flex-col'>
                 <div className="relative h-full flex-row rounded">
                     <div className="absolute top-0 z-10 px-[5px] pt-[5px] font-penny text-[24px]">Work</div>
-                    {/* Grid */}
                     <ObjectSection />
                 </div>
             </div>

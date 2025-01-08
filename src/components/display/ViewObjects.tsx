@@ -8,7 +8,7 @@ import { urlBuilder } from '@/helpers/utils/sanityUrlBuilder';
 
 
 
-export const TestSanity = () => {
+export const ViewObjects = () => {
     const [data, setData] = useState<WorkBatch>([])
 
     useMemo(async () => {
