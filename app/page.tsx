@@ -6,6 +6,13 @@ import { Environment } from '@react-three/drei'
 import dynamic from 'next/dynamic'
 import { MouseEvent, Suspense } from 'react'
 
+/*
+  TODO:
+   Remove all repetition, alot of variables being reused across alot of the files, for instance the view variable below is used a lot across
+   the architecture. 
+   I believe these repitions are causing a lot of buggy behaviour for the 3D components. 
+   Before working on any more features I want to refine all of this to see if it would better the performance of the site. 
+*/
 
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
