@@ -18,7 +18,7 @@ export const ViewObjects = () => {
 
     return (
         <div className='h-dvh'>
-            <div className='relative grid h-full grid-cols-2 gap-[10px] md:grid-cols-3'>
+            <div className='relative grid h-full grid-cols-2 gap-[5px] md:grid-cols-3'>
                 {data && data.map((post, index) => (
                     <PreviewObject key={index} value={urlBuilder(post.objectFile.asset._ref)} />
                 ))}

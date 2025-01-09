@@ -2,6 +2,7 @@
 
 import { MetaBall } from '@/components/canvas/Examples'
 import { WorkSection } from '@/components/display/WorkSection'
+import { Environment } from '@react-three/drei'
 import dynamic from 'next/dynamic'
 import { MouseEvent, Suspense } from 'react'
 
@@ -42,6 +43,7 @@ export default function Page() {
           <Suspense fallback={null}>
             <MetaBall scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0]} />
             <Common color={'white'} />
+            <Environment preset='lobby' background />
           </Suspense>
         </View>
       </div>
