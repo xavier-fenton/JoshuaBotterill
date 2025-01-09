@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import React, { Suspense, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useSpring, animated, config } from '@react-spring/three'
+import { useRouter } from 'next/navigation';
+import { Work } from 'sanity/lib/types/work';
 
 
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -33,9 +35,11 @@ type PropType = {
     fileSource: string
 }
 
-export const PreviewObject = ({ value, objectData }) => {
+export const PreviewObject = ({ value, objectData }: { value: string, objectData: Work }) => {
+
     const [active, setActive] = useState<boolean>(false)
-    // const springs = useSpring({ scale: active ? 0.65 : 0.5 })
+    const router = useRouter()
+
     const { scale } = useSpring({ scale: active ? 0.65 : 0.5, config: config.slow })
 
 
@@ -59,7 +63,11 @@ export const PreviewObject = ({ value, objectData }) => {
     /* 
         TODO:
             BUG:
-            Enviroment is weird with this animation implementation.
+            Each object enviroment(HDRI) is weird with this animation implementation, 
+            what it does is regestures for both Object HDRIs. If I rotate one object,
+            the position is translated to the other object rotation, and sets back the 
+            original object to default postion and vice versa.
+
             Will have to come back to this
 
     */
@@ -69,7 +77,16 @@ export const PreviewObject = ({ value, objectData }) => {
             <View className="relative h-full">
                 <Suspense>
                     <Object
-                        onClick={() => { console.log(objectData) }}
+                        onClick={() => {
+                            /* 
+                            TODO:
+                                This to open a new page ref the figma for design, create a dynamic page that 
+                                carries the clicked objects file and details to the a new page Route will be
+                                /objects/<nameofobject> 
+
+                            */
+                            router.push(`/objects/${objectData.title.replaceAll(" ", "")}`)
+                        }}
                         onPointerOver={() => {
                             setActive(true);
                         }}
