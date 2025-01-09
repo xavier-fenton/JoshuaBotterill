@@ -6,6 +6,7 @@ export type Work = {
     _id: string,
     description_block: TypedObject[] | TypedObject,
     objectFile: File
+    slug: Slug
 }
   
 export type WorkBatch = Work[]
