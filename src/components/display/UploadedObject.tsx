@@ -1,8 +1,9 @@
 // This component is purely for previewing the Objects in the Sanity Studio
+'use client'
 import { Environment, Html, OrbitControls, useCursor } from '@react-three/drei';
 import { MeshProps, useLoader } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, cache } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useSpring, animated, config } from '@react-spring/three'
 import { useRouter } from 'next/navigation';
@@ -24,6 +25,8 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
         </div>
     ),
 })
+
+
 export const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 
@@ -35,7 +38,7 @@ type PropType = {
     fileSource: string
 }
 
-export const PreviewObject = ({ value, objectData }: { value: string, objectData: Work }) => {
+export const UploadedObject = ({ source, objectData }: { source: string, objectData: Work }) => {
 
     const [active, setActive] = useState<boolean>(false)
     const router = useRouter()
@@ -43,13 +46,13 @@ export const PreviewObject = ({ value, objectData }: { value: string, objectData
     const { scale } = useSpring({ scale: active ? 0.65 : 0.5, config: config.slow })
 
 
-    if (!value) {
+    if (!source) {
         return <Html><p className='border'>No file uploaded yet</p></Html>
     }
 
     function Object(props: MeshProps) {
 
-        const { scene } = useLoader(GLTFLoader, value as string)
+        const { scene } = useLoader(GLTFLoader, source as string)
 
 
         return (
@@ -85,7 +88,7 @@ export const PreviewObject = ({ value, objectData }: { value: string, objectData
                                 /objects/<nameofobject> 
 
                             */
-                            router.push(`/objects/${objectData.title.replaceAll(" ", "")}`)
+                            router.push(`/objects/${objectData.slug.current}`)
                         }}
                         onPointerOver={() => {
                             setActive(true);
@@ -103,4 +106,4 @@ export const PreviewObject = ({ value, objectData }: { value: string, objectData
     );
 };
 
-export default PreviewObject;
+export default UploadedObject;

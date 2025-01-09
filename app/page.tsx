@@ -22,6 +22,8 @@ export const View = dynamic(() => import('@/components/canvas/View').then((mod) 
     </div>
   ),
 })
+
+
 export const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
@@ -37,7 +39,7 @@ export default function Page() {
 
   return (
     <>
-      <div className='absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-12 font-penny text-[48px]'>JoshBotterill</div>
+      <div className='font-penny absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -rotate-12 text-[48px]'>JoshBotterill</div>
       <div className='relative h-full'>
         <View className="relative h-full">
           <Suspense fallback={null}>
@@ -47,7 +49,7 @@ export default function Page() {
           </Suspense>
         </View>
       </div>
-      <div className='absolute bottom-0 right-0 z-10 flex cursor-pointer flex-col p-8 text-center font-penny text-[48px]'>
+      <div className='font-penny absolute bottom-0 right-0 z-10 flex cursor-pointer flex-col p-8 text-center text-[48px]'>
         <a onClick={(e) => handleScroll(e, '#work-section')} className=''>Work</a>
         <a onClick={(e) => handleScroll(e, '#imprint-section')} className=''>Imprint</a>
       </div>

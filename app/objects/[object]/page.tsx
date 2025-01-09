@@ -1,20 +1,51 @@
-'use server'
-
 import Link from "next/link"
-export async function Page2({ params }: { params: Promise<{ slug: string }> }) {
-    const slug = (await params).slug
-    return <div>My Post: {slug}</div>
+import { retrieveContent } from "../../../sanity/lib/utils/fetchPosts";
+import { client } from "../../../sanity/lib/utils/sanityClient";
+import { Work, WorkBatch } from "../../../sanity/lib/types/work";
+import { Slug } from "sanity";
+import UploadedObject from "@/components/display/UploadedObject";
+import { urlBuilder } from "@/helpers/utils/sanityUrlBuilder";
+import { ObjectSection } from "@/components/display/ObjectSection";
+
+
+async function getCurrentObject(slug: string) {
+
+    const data = await retrieveContent(client)
+    if (!data) {
+        console.trace()
+        console.error("Error recieving information from the Sanity Client")
+    } else return data
+
 }
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    const slug = (await params).slug
+
+function matchCurrentData(arg: WorkBatch, match: any) {
+    return arg.find((entry: Work) => entry.slug.current === match)
+}
+
+export default async function Page({ params }: { params: { object: string } }) {
+
+    const slug = params.object
+    const data = await getCurrentObject(slug)
+    const objectData = matchCurrentData(data, slug)
+
+    // Better error handling here
+    if (!objectData) {
+        return <h1 className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-sm">404 - Sorry page doesn't exist...</h1>
+    }
+
+
+
+
 
     return (
         <>
             <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className='font-penny absolute top-[20px] z-10 -rotate-12 text-[40px]'><Link href="/">JoshBotterill</Link></div>
-                <div className="h-dvh"></div>
+                <div className="h-dvh">
+                    <ObjectSection source={urlBuilder(objectData.objectFile.asset._ref)} />
+                </div>
                 <div className="h-dvh pt-[40px]">
-                    <div className="relative top-[40px] text-[64px] lg:absolute">Object001</div>
+                    <div className="relative top-[40px] text-[64px] lg:absolute">{objectData.title}</div>
                     <div>
                         <div className="w-[70%] pl-[10px] pt-[10px] text-justify text-xs lg:pl-[40px] lg:pt-[68px]">
                             <p>
