@@ -1,9 +1,10 @@
 // This component is purely for previewing the Objects in the Sanity Studio
-import { Environment, InstanceProps, OrbitControls } from '@react-three/drei';
-import { Canvas, MeshProps, useLoader } from '@react-three/fiber';
+import { Environment, Html, OrbitControls, useCursor } from '@react-three/drei';
+import { MeshProps, useLoader } from '@react-three/fiber';
 import dynamic from 'next/dynamic';
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useSpring, animated, config } from '@react-spring/three'
 
 
 export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -33,9 +34,13 @@ type PropType = {
 }
 
 export const PreviewObject = ({ value }) => {
+    const [active, setActive] = useState<boolean>(false)
+    // const springs = useSpring({ scale: active ? 0.65 : 0.5 })
+    const { scale } = useSpring({ scale: active ? 0.65 : 0.5, config: config.slow })
+
 
     if (!value) {
-        return <p className='border'>No file uploaded yet</p>;
+        return <Html><p className='border'>No file uploaded yet</p></Html>
     }
 
     function Object(props: MeshProps) {
@@ -43,7 +48,11 @@ export const PreviewObject = ({ value }) => {
         const { scene } = useLoader(GLTFLoader, value as string)
 
 
-        return <primitive object={scene} {...props} />
+        return (
+            <animated.mesh scale={scale}>
+                <primitive object={scene} {...props} />
+            </animated.mesh>
+        )
 
     }
 
@@ -52,7 +61,16 @@ export const PreviewObject = ({ value }) => {
         <div className='relative h-full'>
             <View className="relative h-full">
                 <Suspense>
-                    <Object onPointerEnter={() => { console.log(true) }} scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0.0]} />
+                    <Object
+                        onPointerOver={() => {
+                            setActive(true);
+                        }}
+                        onPointerOut={() => {
+                            setActive(false)
+                        }}
+                        position={[0, 0, 0]}
+                        rotation={[0.0, 0.0, 0.0]}
+                    />
                     <Common color={'white'} />
                     <Environment preset='city' background />
                     <OrbitControls enablePan={false} />
