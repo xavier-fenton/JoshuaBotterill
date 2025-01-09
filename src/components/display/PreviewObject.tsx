@@ -33,7 +33,7 @@ type PropType = {
     fileSource: string
 }
 
-export const PreviewObject = ({ value }) => {
+export const PreviewObject = ({ value, objectData }) => {
     const [active, setActive] = useState<boolean>(false)
     // const springs = useSpring({ scale: active ? 0.65 : 0.5 })
     const { scale } = useSpring({ scale: active ? 0.65 : 0.5, config: config.slow })
@@ -49,27 +49,33 @@ export const PreviewObject = ({ value }) => {
 
 
         return (
-            <animated.mesh scale={scale}>
+            <animated.mesh scale={scale} position={[0, 0, 0]}>
                 <primitive object={scene} {...props} />
             </animated.mesh>
         )
 
     }
 
+    /* 
+        TODO:
+            BUG:
+            Enviroment is weird with this animation implementation.
+            Will have to come back to this
+
+    */
 
     return (
         <div className='relative h-full'>
             <View className="relative h-full">
                 <Suspense>
                     <Object
+                        onClick={() => { console.log(objectData) }}
                         onPointerOver={() => {
                             setActive(true);
                         }}
                         onPointerOut={() => {
                             setActive(false)
                         }}
-                        position={[0, 0, 0]}
-                        rotation={[0.0, 0.0, 0.0]}
                     />
                     <Common color={'white'} />
                     <Environment preset='city' background />
