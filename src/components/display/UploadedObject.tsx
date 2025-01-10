@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { Work } from 'sanity/lib/types/work';
 
 
-export const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
+const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
         <div className='flex h-96 w-full flex-col items-center justify-center'>
@@ -77,30 +77,24 @@ export const UploadedObject = ({ source, objectData }: { source: string, objectD
 
     return (
         <div className='relative h-full'>
-            <View className="relative h-full">
-                <Suspense>
-                    <Object
-                        onClick={() => {
-                            /* 
-                            TODO:
-                                This to open a new page ref the figma for design, create a dynamic page that 
-                                carries the clicked objects file and details to the a new page Route will be
-                                /objects/<nameofobject> 
+            <View className="h-full cursor-pointer">
+                    <Suspense>
+                        <Object 
+                            onClick={() => {
+                                /* 
+                                TODO:
+                                    This to open a new page ref the figma for design, create a dynamic page that 
+                                    carries the clicked objects file and details to the a new page Route will be
+                                    /objects/<nameofobject> 
 
-                            */
-                            router.push(`/objects/${objectData.slug.current}`)
-                        }}
-                        onPointerOver={() => {
-                            setActive(true);
-                        }}
-                        onPointerOut={() => {
-                            setActive(false)
-                        }}
-                    />
-                    <Common color={'white'} />
-                    <Environment preset='city' background />
-                    <OrbitControls enablePan={false} />
-                </Suspense>
+                                */
+                                router.push(`/objects/${objectData.slug.current}`)
+                            }}
+                        />
+                        <Common color={'white'} />
+                        <Environment preset='city' background/>
+                        {/* <OrbitControls enablePan={false} /> */}
+                    </Suspense>
             </View>
         </div>
     );

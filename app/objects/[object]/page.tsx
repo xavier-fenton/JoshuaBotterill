@@ -2,8 +2,6 @@ import Link from "next/link"
 import { retrieveContent } from "../../../sanity/lib/utils/fetchPosts";
 import { client } from "../../../sanity/lib/utils/sanityClient";
 import { Work, WorkBatch } from "../../../sanity/lib/types/work";
-import { Slug } from "sanity";
-import UploadedObject from "@/components/display/UploadedObject";
 import { urlBuilder } from "@/helpers/utils/sanityUrlBuilder";
 import { ObjectSection } from "@/components/display/ObjectSection";
 
@@ -18,7 +16,7 @@ async function getCurrentObject(slug: string) {
 
 }
 
-function matchCurrentData(arg: WorkBatch, match: any) {
+function matchCurrentData(arg: WorkBatch, match: string) {
     return arg.find((entry: Work) => entry.slug.current === match)
 }
 

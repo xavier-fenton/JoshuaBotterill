@@ -1,4 +1,4 @@
-import React, { use, useMemo, useState } from 'react';
+import React, { cache, use, useEffect, useMemo, useState } from 'react';
 import { retrieveContent } from '../../../sanity/lib/utils/fetchPosts';
 import { client } from '../../../sanity/lib/utils/sanityClient';
 import { Work, WorkBatch } from 'sanity/lib/types/work';
@@ -11,10 +11,13 @@ import { urlBuilder } from '@/helpers/utils/sanityUrlBuilder';
 export const ViewObjects = () => {
     const [data, setData] = useState<WorkBatch>([])
 
-    useMemo(async () => {
-        const data = await retrieveContent(client)
-        return setData(data)
-    }, [])
+    useMemo(() => {     
+        console.log('memo running');
+           
+        retrieveContent(client).then((data) => {
+            setData(data)
+        }).catch((error) => console.error(error))
+    },[])
 
     return (
         <div className='h-dvh'>

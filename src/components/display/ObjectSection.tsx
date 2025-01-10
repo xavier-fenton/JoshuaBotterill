@@ -40,7 +40,7 @@ export const ObjectSection = ({ source }: { source: string }) => {
                 <Suspense>
                     <Object scale={0.5} position={[0, 0, 0]} rotation={[0.0, 0.0, 0]} />
                     <Common color={'white'} />
-                    <Environment preset='city' background />
+                    <Environment files='/vic.exr' background/>
                     <OrbitControls />
                 </Suspense>
             </View>
