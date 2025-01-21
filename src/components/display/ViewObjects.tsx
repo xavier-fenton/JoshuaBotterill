@@ -11,9 +11,7 @@ import { urlBuilder } from '@/helpers/utils/sanityUrlBuilder';
 export const ViewObjects = () => {
     const [data, setData] = useState<WorkBatch>([])
 
-    useMemo(() => {     
-        console.log('memo running');
-           
+    useMemo(() => {                
         retrieveContent(client).then((data) => {
             setData(data)
         }).catch((error) => console.error(error))

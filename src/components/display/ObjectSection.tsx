@@ -9,7 +9,7 @@ import { Environment, OrbitControls } from '@react-three/drei'
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
-        <div className='flex h-96 w-full flex-col items-center justify-center'>
+        <div className='flex h-dvh w-full flex-col items-center justify-center'>
             <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
                 <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
                 <path
